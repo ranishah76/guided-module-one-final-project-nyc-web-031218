@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 4) do
     t.string "neighbourhood"
   end
 
-  create_table "librarycards", force: :cascade do |t|
+  create_table "reservations", force: :cascade do |t|
     t.integer "user_id"
     t.integer "book_id"
   end

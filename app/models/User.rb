@@ -1,4 +1,4 @@
 class User < ActiveRecord::Base
-  has_many :books, through: :librarycard
-  belongs_to :library
+  has_many :books, through: :reservation
+  #has_many :libraries, through: :books
 end

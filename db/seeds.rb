@@ -1,0 +1,17 @@
+frank = User.create(name: "frank", age: 34, neighbourhood: "UWS")
+rani = User.create(name: "rani", age: 25, neighbourhood: "East Vill")
+bob = User.create(name: "bob", age: 40, neighbourhood: "LES")
+sienna = User.create(name: "sienna", age:32, neighbourhood: "UWS")
+brad = User.create(name: "brad", 45, neighbourhood: "Noho")
+
+the_power = Book.create(title: "the power", author: "naomi alderman", genre: "science fiction", library_: nil, availability: false)
+catcher_in_the_rye = Book.create(title:"catcher in the rye", author: "j.d. salinger", genre: "literary fiction", library_id: nil, availability: true)
+what_happened = Book.create(title:"what happened", author: "hillary clinton", genre: "non fiction", library_id: nil, availability: false)
+outliers = Book.create(title:"outliers", author: "malcolm gladwell", genre: "non fiction", library_id: nil, availability: true)
+tipping_point = Book.create(title:"tipping point", author: "malcom gladwell", genre: "tipping point", library_id: nil, availability: true)
+moby_dick = Book.create(title:"moby dick", author: "herman melville", genre: "literary fiction", library_id: nil, availability: true)
+
+library_UWS = Library.create(name: "library1", neighbourhood: "UWS")
+library_LES = Library.create(name: "library2", neighbourhood: "LES")
+library_East_Vill = Library.create(name: "library3", neighbourhood: "East Vill")
+library_Noho = Library.create(name: "library4", neighbourhood: "Noho")

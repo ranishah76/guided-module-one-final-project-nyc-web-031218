@@ -1,4 +1,4 @@
 class Library < ActiveRecord::Base
-  has_many :books 
-  has_many :users
+  has_many :books
+  has_many :users #through: :books
 end
