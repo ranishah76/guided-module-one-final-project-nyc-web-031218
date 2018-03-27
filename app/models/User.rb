@@ -7,8 +7,10 @@ class User < ActiveRecord::Base
     response = gets.chomp
      x = Book.all.find do |book|
       book.title == response
-    end.validate?(x)
+    end
+    Book.validate_book(x)
   end
+
 
 
 # def validate(x)

@@ -15,8 +15,8 @@ def greeting
 end
 
 greeting
-# Book.validate?(User.find_book)
-
+# Book.validate_book(User.find_book)
+# Book.feeling_lucky << this works
 # User.find_book
 
 # def show_users
