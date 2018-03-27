@@ -5,7 +5,7 @@ class CreateBooks < ActiveRecord::Migration
       t.string :author
       t.string :genre
       t.integer :library_id
-      t.boolean :availability
+      t.boolean :availability ||= true
     end
   end
 end

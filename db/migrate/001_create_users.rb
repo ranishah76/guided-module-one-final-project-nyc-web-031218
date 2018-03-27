@@ -3,7 +3,7 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.string :name
       t.integer :age
-      t.string :neighbourhood
+      t.string :neighbourhood ||= nil
     end
   end
 end
