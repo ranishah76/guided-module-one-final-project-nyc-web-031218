@@ -7,13 +7,23 @@ def greeting
   puts "B - I’m looking for something similiar to a certain book."
   puts "C - I would like to return a book"
   response = gets.chomp
+  if response.downcase == "a"
+    User.find_book
+  end
   ##response must be a, b, or c - if not please choose a, b, or c.
-  puts "You chose #{response}"
+
 end
 
-def show_users
-  User.all
-end
+greeting
+# Book.validate?(User.find_book)
+
+# User.find_book
+
+# def show_users
+#   puts User.all
+# end
+
+
 
 # def return_book
 #     book.availability = "False"
