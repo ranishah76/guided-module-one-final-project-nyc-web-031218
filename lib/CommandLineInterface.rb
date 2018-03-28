@@ -1,29 +1,46 @@
 require 'pry'
 
 def greeting
-  puts "Howdy! Welcome to Book Finder!".yellow
-  puts "What can we help you with today?"#“Howdy! How/’s it going? What can we help you with today?”
-  puts "A - I would like to find out if this book is available."
-  puts "B - I’m looking for something similiar to a certain book."
-  puts "C - I would like to return a book"
-  response = gets.chomp
-  case response
-  # if response.downcase == "a"
-  when "a"
-    User.find_book
-  when "b"
-    puts "What is the title of the book that you're looking for?"
-    response = gets.chomp
-     x = Book.all.find do |book|
-      book.title == response
-    end
-    Book.suggested_book(x)
-  when "c"
-    response.downcase == "c"
-    Book.return_book
-  end
-  ##response must be a, b, or c - if not please choose a, b, or c.
-
+  puts "Howdy! Welcome to the" + "   BOOKFLIX!!!".bold.red
+  sleep(1)
+  puts "So, fellow #arrested developers, I know what you're thinking, what are we?"
+  sleep(1)
+  puts "As by our (#totally non-cheesy) name - we're that meet-cute between books and netflix."
+  sleep(1)
+  puts "The first original world-famous CLI app for finding book recommendations."
+  sleep(1)
+  puts "So lets not waste any time, let's dive right in."
+  sleep(1)
 end
-
 greeting
+User.main_menu
+
+# def main_menu
+#   puts "Here are your options, just select A, B or C:"
+#   puts "A - Got a book in mind. Let's find it"
+#   puts "B - No idea. Help me out. PLEAAAASE."
+#   puts "C - Breaking-up with my book. Need to return it.\n" #return
+#   puts "D - Goodbye"
+#   response = gets.chomp.upcase
+#   case response
+#   # if response.downcase == "a"
+# when "A"
+#     User.find_book
+#   when "B"
+#     puts "Don't worry, we've got your back!"
+#     puts "Just tell us a book that you love. And we'll find something similiar."
+#     response = gets.chomp.downcase
+#      x = Book.all.find do |book|
+#       book.title == response
+#     end
+#     Book.suggested_book(x)
+#   when "C"
+#     response.downcase == "c"
+#     Book.return_book
+#   when "D"
+#     Book.feeling_lucky
+#
+#   end
+#   ##response must be a, b, or c - if not please choose a, b, or c.
+#
+# end

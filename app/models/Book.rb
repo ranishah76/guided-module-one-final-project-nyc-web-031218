@@ -6,10 +6,11 @@ class Book < ActiveRecord::Base
    m = x.availability
   case m
   when true
-    puts 'This is available. Would you like to reserve?'
-    response = gets.chomp
+    puts 'Just your luck. This is available. Do you want to go right ahead, and reserve?'
+    puts "Hell yeah or nah?"
+    response = gets.chomp.downcase.first
   else
-    puts 'This is not available, sorry!'
+    puts 'This is not available, </3!'
     Book.choose_option(x)
     end
      l = x #l is our whole book instance
@@ -19,12 +20,26 @@ class Book < ActiveRecord::Base
 
   def self.reserve(y, l)
     case y
-    when "yes"
+    when "h"
       l.availability = false
       l.save
-      puts "You have now reserved the book. Have a great day"
-    when "no"
-      puts "Have a great day!"
+      puts "ITS YOURS."
+      puts "ITS RESERVED."
+      puts "BUT REMEMBER...."
+      puts "NOT FOREVER </3"
+      puts "Happy reading! Bye for now."
+      goodbye
+    when "n"
+      puts "No hard feelings."
+      puts "Heading out? Just type- exit."
+      puts "Or are you feeling lucky #GoogleStyle.....type- lucky"
+      response = gets.chomp.downcase.first
+    case response
+    when "l"
+      Book.feeling_lucky
+    when "e"
+      goodbye
+    end
     end
   end
 
@@ -36,51 +51,79 @@ class Book < ActiveRecord::Base
 
   def self.return_book
     puts "What is the title of the book?"
-    response = gets.chomp
+    response = gets.chomp.downcase
     x = Book.all.find do |book|
      book.title == response
    end
     x.availability = true
     x.save
-    puts "Perfect, thanks for returning"
+    puts "Great, #{x.title} has been returned."
+    puts "Are you finished? Hell yeah or nah?"
+    response = gets.chomp.downcase.first
+    case response
+    when "h" || "y"
+    goodbye
+  when "n"
+    User.main_menu
+    end
   end
 
 
 
 def self.choose_option(x)
-  puts "Would you like to try our new feature feeling lucky or find a book based in the same genre of what you were looking for?"
-  puts "A - Feeling Lucky"
-  puts "B - Suggested Book within same genre"
-  puts "C - Neither"
-  response = gets.chomp
+  puts "Don't stress. How about we help you find another book? Just pick from the options below."
+  puts "A - I'm Feeling Lucky #GoogleStyle"
+  puts "B - I'm still feeling #{x.genre}."
+  puts "C - Neither."
+  response = gets.chomp.downcase
   case response
-  when "A"
+  when "a"
     Book.feeling_lucky
-  when "B"
+  when "b"
     x
-    puts "Great - let's figure something out"
     Book.suggested_book(x)
-  when "C"
-    puts "Ok, no worries! Have a great day!"
+  when "c"
+    puts "Ok, no worries!"
+    goodbye
   end
   x
 end
 
 
 
-def self.feeling_lcky
-  puts "Perfect. You're a daredevil. Are you ready?".red
-  puts "3".red
-  sleep(3)
-  puts "2".black
-  sleep(3)
-  puts "1".green
-  x = Book.all.find do |book|
-    book.id == rand(1...5)
-  end
-  puts "This is a chosen book for you! Title: #{x.title} Author: #{x.author}".green
-  puts "Would you like to reserve the book?"
-  response = gets.chomp
+def self.feeling_lucky
+  puts "YOU daredevil.".red
+  sleep(1)
+  puts "Ready for an awesome book?".red
+  # sleep(1)
+  # puts "3".red
+  # sleep(2)
+  # puts "2"
+  # sleep(1)
+  # puts "1".green
+  # sleep(2)
+  # puts ""
+  # puts ""
+  # puts "WAIT FOR IT".yellow
+  # puts ""
+  # puts ""
+  # puts ""
+  # sleep(2)
+  # puts ""
+  # puts ""
+  # puts ""
+  # puts ""
+  # puts ""
+  # puts "WAIT FOR IT".bold.yellow
+  # puts ""
+  # puts ""
+  # puts ""
+  # sleep(2)
+  x = Book.all.sample
+  puts "Voilà! Here's our pick for you: #{x.title} by #{x.author}".green
+  puts "/n Do you want go right ahead and reserve the book?"
+  puts "Hell yeah or nah?"
+  response = gets.chomp.downcase.first
   Book.reserve(response, x)
   end
 
@@ -88,11 +131,19 @@ def self.feeling_lcky
     j = Book.all.select do |book|
       book.genre == x.genre && book.availability == true
     end
+     x
      k = j.sample
     #   #j is the new array of specific random book instance within genre
+       puts "#{x.genre.upcase} OMG. OUR FAVOURITE GENRE TOO!!"
        puts "We thought you might like this: Title: #{k.title} by #{k.author}"
        puts "Would you like to reserve this book?"
-    response = gets.chomp
-    Book.reserve(response, k)
+    y = gets.chomp.downcase.first
+    Book.reserve(y, k)
     end
+  end
+
+  def goodbye
+    puts "Thanks for checking us out. Loved having you here."
+    puts "The more that you read, the more things that you'll know. The more you'll learn, the more places that you'll go."
+    puts "Dr.Seuss"
   end

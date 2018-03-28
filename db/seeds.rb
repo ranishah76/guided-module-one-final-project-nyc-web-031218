@@ -10,6 +10,10 @@ what_happened = Book.create(title:"what happened", author: "hillary clinton", ge
 outliers = Book.create(title:"outliers", author: "malcolm gladwell", genre: "non fiction", library_id: nil, availability: true)
 tipping_point = Book.create(title:"tipping point", author: "malcom gladwell", genre: "non fiction", library_id: nil, availability: true)
 moby_dick = Book.create(title:"moby dick", author: "herman melville", genre: "literary fiction", library_id: nil, availability: false)
+great_gatsby = Book.create(title:"great gatsby", author: "f. scott fitzgerald", genre: "literary fiction", library_id: nil, availability: true)
+the_handmaids_tale = Book.create(title:"the handmaids tale", author: "magaret atwood", genre: "literary fiction", library_id: nil, availability: false)
+harry_potter = Book.create(title:"harry potter", author: "jk. rowling", genre: "fiction", library_id: nil, availability: true)
+the_sun_also_rises = Book.create(title:"the sun also rises", author: "ernest hemmingway", genre: "literary fiction", library_id: nil, availability: false)
 
 library_UWS = Library.create(name: "library1", neighbourhood: "UWS")
 library_LES = Library.create(name: "library2", neighbourhood: "LES")

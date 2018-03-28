@@ -3,30 +3,41 @@ class User < ActiveRecord::Base
   has_many :libraries #through: :books
 
   def self.find_book
-    puts "What is the title of the book that you're looking for?"
-    response = gets.chomp
+    puts "Dang. This is exciting. Write the title of the book below, and we'll let you know if it's availble."
+    response = gets.chomp.downcase
      x = Book.all.find do |book|
       book.title == response
     end
     Book.validate_book(x)
   end
 
+  def self.main_menu
+    puts "Here are your options, just select A, B or C:"
+    puts "A - Got a book in mind. Let's find it"
+    puts "B - No idea. Help me out. PLEAAAASE."
+    puts "C - Breaking-up with my book. Need to return it.\n" #return
+    puts "D - Goodbye"
+    response = gets.chomp.upcase
+    case response
+    # if response.downcase == "a"
+  when "A"
+      User.find_book
+    when "B"
+      puts "Don't worry, we've got your back!"
+      puts "Just tell us a book that you love. And we'll find something similiar."
+      response = gets.chomp.downcase
+       x = Book.all.find do |book|
+        book.title == response
+      end
+      Book.suggested_book(x)
+    when "C"
+      response.downcase == "c"
+      Book.return_book
+    when "D"
+      Book.feeling_lucky
 
+    end
+    ##response must be a, b, or c - if not please choose a, b, or c.
 
-# def validate(x)
-#   if x.availability == "true"
-#     puts "This book is available, would you like to reserve?"
-#    else
-#      puts "Sorry! This book is not available, can we help you with something else?"
-#      gets.chomp = response1
-#    end
-#  end
-     # if response1 == "No"
-     #  "Ok have a good day!"
-  #  puts “What is the title of the book you’re looking for?"
-  # #        Response = gets.chomp
-  # #        Book.all.find do |book|
-  # #        Book == response
-  # #     end.validate?
-  # # end
+  end
 end
