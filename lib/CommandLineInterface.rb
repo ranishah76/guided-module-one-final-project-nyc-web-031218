@@ -27,33 +27,3 @@ def greeting
 end
 
 greeting
-# Book.validate_book(User.find_book)
-# Book.feeling_lucky << this works
-# greeting
-# Book.feeling_lucky
-# User.find_book
-
-# def show_users
-#   puts User.all
-# end
-
-# Book.return_book
-
-# def return_book
-#     book.availability = "False"
-#     book.user_id = nil
-#     puts "Hope it was a great read!"
-#     goodbye
-#   end
-#
-# def option(response)
-#   if response == "A"
-#     return "Hey"
-#   elsif response == "B"
-#   return "Hey"
-# else response == "C"
-#   return_book
-# end
-# end
-
-# return_book

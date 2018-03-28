@@ -68,7 +68,7 @@ end
 
 
 
-def self.feeling_lucky
+def self.feeling_lcky
   puts "Perfect. You're a daredevil. Are you ready?".red
   puts "3".red
   sleep(3)
