@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
-  has_many :books, through: :reservation
+  has_many :reservations
+  has_many :books, through: :reservations
   has_many :libraries #through: :books
-
+###user is good here
   def self.find_book(user)
     puts "\nDang. This is exciting #{user.name}. Write the title of the book below, and we'll let you know if it's availble."
     response = gets.chomp
@@ -12,13 +13,8 @@ class User < ActiveRecord::Base
     Book.validate_book(x, user)
   end
 
-  def self.main_menu
-    puts "First off, what's your name?"
-    name = gets.chomp
-    user = User.all.find do |user|
-      user.name.downcase == name.downcase
-    end
-    name
+  def self.main_menu(user)
+    user
     puts "\nAwesome, love the name!"
     puts "So #{name} here are your options, just select A, B or C:".yellow
     puts "A".yellow + "- Got a book in mind. Let's find it"
@@ -30,7 +26,7 @@ class User < ActiveRecord::Base
     case response
     # if response.downcase == "a"
   when "A"
-      name
+      user
       User.find_book(user)
     when "B"
       puts "\nDon't worry, we've got your back!".yellow
@@ -39,18 +35,18 @@ class User < ActiveRecord::Base
        x = Book.all.find do |book|
         book.title.downcase == response.downcase
       end
-      Book.suggested_book(x)
+       user
+       binding.pry
+      Book.suggested_book(x, user)
     when "C"
-      Book.return_book
-    when "D"
-      User.list_book
+      Book.return_book(user)
     end
-    ##response must be a, b, or c - if not please choose a, b, or c.
+end
 
-    def add_reservation(self.id, book.id)
-      Reservation.new(self.id, book.id)
-      binding.pry
-      user.book = y
-      binding.pry
-  end
+def add_book(book)
+binding.pry
+Reservation.new(self, book)
+binding.pry
+end
+
 end

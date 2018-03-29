@@ -9,11 +9,16 @@ def greeting
   sleep(1)
   puts "\nOur first original (soon to be world-famous) CLI app for finding book recommendations."
   sleep(1)
-  puts "\nSo lets not waste any time, let's dive right in."
-  sleep(1)
+  puts "\nSo lets not waste any time, what's your name?"
+ name = gets.chomp
+#User.new(name.to_s)###################
+ user = User.all.find do |user|
+  user.name.downcase == name.downcase
 end
+User.main_menu(user)
+end
+
 greeting
-User.main_menu
 
 # def main_menu
 #   puts "Here are your options, just select A, B or C:"
