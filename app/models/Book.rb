@@ -2,7 +2,7 @@ class Book < ActiveRecord::Base
   belongs_to :library
   belongs_to :user#, through: :reservation
 
-  def self.validate_book(x)
+  def self.validate_book(x, user)
    m = x.availability
   case m
   when true
@@ -10,19 +10,22 @@ class Book < ActiveRecord::Base
     puts "\nHell yeah or nah?"
     response = gets.chomp.downcase.first
   else
-    puts '\nThis is not available, </3!'
-    Book.choose_option(x)
-    end
+    puts "\nThis is not available #{user.name}, </3!"
+    Book.choose_option(x, user)
+  end
+     name
      l = x #l is our whole book instance
      y = response
-     puts self.reserve(y, l)
+     puts self.reserve(y, l, user)
   end
 
-  def self.reserve(y, l)
+  def self.reserve(y, l, user)
     case y
     when "h"
       l.availability = false
       l.save
+      user << y
+      binding.pry
       puts "\nITS YOURS.".bold.red
       puts "\nITS RESERVED."
       puts "\nBUT REMEMBER...."
@@ -32,6 +35,7 @@ class Book < ActiveRecord::Base
     when "y"
       l.availability = false
       l.save
+      User.add_book(y)
       puts "\nITS YOURS.".bold.red
       puts "\nITS RESERVED."
       puts "\nBUT REMEMBER...."
@@ -62,7 +66,7 @@ class Book < ActiveRecord::Base
     puts "\nWhat is the title of the book?"
     response = gets.chomp.downcase
     x = Book.all.find do |book|
-     book.title == response
+     book.title.downcase == response.downcase
    end
     x.availability = true
     x.save
@@ -70,8 +74,10 @@ class Book < ActiveRecord::Base
     puts "\nAre you finished? Hell yeah or nah?"
     response = gets.chomp.downcase.first
     case response
-    when "h" || "y"
+    when "h"
     goodbye
+  when "y"
+  goodbye
   when "n"
     User.main_menu
     end
@@ -79,11 +85,11 @@ class Book < ActiveRecord::Base
 
 
 
-def self.choose_option(x)
+def self.choose_option(x, name)
   puts "\nDon't stress. How about we help you find another book? Just pick from the options below."
   puts "\nA".yellow + "- I'm Feeling Lucky #GoogleStyle"
-  puts "\nB" + "I'm still feeling #{x.genre}."
-  puts "\nC" + "Neither."
+  puts "\nB".yellow + "I'm still feeling #{x.genre}."
+  puts "\nC".yellow + "Neither."
   response = gets.chomp.downcase
   case response
   when "a"
@@ -110,7 +116,7 @@ def self.feeling_lucky
   puts "\n2".yellow
   sleep(1)
   puts "\n1".green
-  pid = fork{ exec 'afplay', "music/Elevator Music 1 hour.mp3"}
+  # pid = fork{ exec 'afplay', ~/app/music/Elevator Music 1 hour-[AudioTrimmer.com].mp3}
   sleep(2)
   puts ""
   puts ""
@@ -129,7 +135,7 @@ def self.feeling_lucky
   puts ""
   puts ""
   sleep(3)
-  pid = fork{ exec 'killall', "afplay" }
+  # pid = fork{ exec 'killall', "afplay" }
   x = Book.all.sample
   puts "\nVoilà! Here's our pick for you:" + " #{x.title} by #{x.author}".green
   puts "\nDo you want go right ahead and reserve the book?"

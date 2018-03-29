@@ -1,8 +1,8 @@
-frank = User.create(name: "frank", age: 34, neighbourhood: "UWS")
-rani = User.create(name: "rani", age: 25, neighbourhood: "East Vill")
-bob = User.create(name: "bob", age: 40, neighbourhood: "LES")
-sienna = User.create(name: "sienna", age:32, neighbourhood: "UWS")
-brad = User.create(name: "brad", age: 45, neighbourhood: "Noho")
+frank = User.create(name: "Frank", age: 34, neighbourhood: "UWS")
+rani = User.create(name: "Rani", age: 25, neighbourhood: "East Vill")
+bob = User.create(name: "Bob", age: 40, neighbourhood: "LES")
+sienna = User.create(name: "Sienna", age:32, neighbourhood: "UWS")
+brad = User.create(name: "Brad", age: 45, neighbourhood: "Noho")
 
 the_power = Book.create(title:"The Power", author: "Naomi Alderman", genre: "Fiction", availability: false)
 catcher_in_the_rye = Book.create(title:"Catcher in the Rye", author: "J D. Salinger", genre: "Literary Fiction", availability: true)
