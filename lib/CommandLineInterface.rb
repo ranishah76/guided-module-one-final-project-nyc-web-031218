@@ -1,15 +1,15 @@
 require 'pry'
 
 def greeting
-  puts "Howdy! Welcome to the" + "   BOOKFLIX!!!".bold.red
+  puts "Howdy! Welcome to the BOOKFLIX!!!".bold.red
   sleep(1)
-  puts "So, fellow #arrested developers, I know what you're thinking, what are we?"
+  puts "\nSo, fellow" + " #arrested developers".bold.red + ", I know what you're thinking, what are we?"
   sleep(1)
-  puts "As by our (#totally non-cheesy) name - we're that meet-cute between books and netflix."
+  puts "\nAs by our (#totallynon-cheesy) name - we're that" + " meet-cute".red + " between " + "books ".red + "and "  + "netflix.".red
   sleep(1)
-  puts "The first original world-famous CLI app for finding book recommendations."
+  puts "\nOur first original (soon to be world-famous) CLI app for finding book recommendations."
   sleep(1)
-  puts "So lets not waste any time, let's dive right in."
+  puts "\nSo lets not waste any time, let's dive right in."
   sleep(1)
 end
 greeting

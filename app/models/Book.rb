@@ -6,11 +6,11 @@ class Book < ActiveRecord::Base
    m = x.availability
   case m
   when true
-    puts 'Just your luck. This is available. Do you want to go right ahead, and reserve?'
-    puts "Hell yeah or nah?"
+    puts "\nJust your luck. This is available. Do you want to go right ahead, and reserve?"
+    puts "\nHell yeah or nah?"
     response = gets.chomp.downcase.first
   else
-    puts 'This is not available, </3!'
+    puts '\nThis is not available, </3!'
     Book.choose_option(x)
     end
      l = x #l is our whole book instance
@@ -23,16 +23,25 @@ class Book < ActiveRecord::Base
     when "h"
       l.availability = false
       l.save
-      puts "ITS YOURS."
-      puts "ITS RESERVED."
-      puts "BUT REMEMBER...."
-      puts "NOT FOREVER </3"
-      puts "Happy reading! Bye for now."
+      puts "\nITS YOURS.".bold.red
+      puts "\nITS RESERVED."
+      puts "\nBUT REMEMBER...."
+      puts "\nNOT FOREVER </3"
+      puts "\nHappy reading! Bye for now."
+      goodbye
+    when "y"
+      l.availability = false
+      l.save
+      puts "\nITS YOURS.".bold.red
+      puts "\nITS RESERVED."
+      puts "\nBUT REMEMBER...."
+      puts "\nNOT FOREVER </3"
+      puts "\nHappy reading! Bye for now."
       goodbye
     when "n"
-      puts "No hard feelings."
-      puts "Heading out? Just type- exit."
-      puts "Or are you feeling lucky #GoogleStyle.....type- lucky"
+      puts "\nNo hard feelings."
+      puts "\nHeading out? Just type- exit."
+      puts "\nOr are you feeling lucky #GoogleStyle.....type- lucky"
       response = gets.chomp.downcase.first
     case response
     when "l"
@@ -50,15 +59,15 @@ class Book < ActiveRecord::Base
 
 
   def self.return_book
-    puts "What is the title of the book?"
+    puts "\nWhat is the title of the book?"
     response = gets.chomp.downcase
     x = Book.all.find do |book|
      book.title == response
    end
     x.availability = true
     x.save
-    puts "Great, #{x.title} has been returned."
-    puts "Are you finished? Hell yeah or nah?"
+    puts "\nGreat, #{x.title} has been returned."
+    puts "\nAre you finished? Hell yeah or nah?"
     response = gets.chomp.downcase.first
     case response
     when "h" || "y"
@@ -71,10 +80,10 @@ class Book < ActiveRecord::Base
 
 
 def self.choose_option(x)
-  puts "Don't stress. How about we help you find another book? Just pick from the options below."
-  puts "A - I'm Feeling Lucky #GoogleStyle"
-  puts "B - I'm still feeling #{x.genre}."
-  puts "C - Neither."
+  puts "\nDon't stress. How about we help you find another book? Just pick from the options below."
+  puts "\nA".yellow + "- I'm Feeling Lucky #GoogleStyle"
+  puts "\nB" + "I'm still feeling #{x.genre}."
+  puts "\nC" + "Neither."
   response = gets.chomp.downcase
   case response
   when "a"
@@ -83,7 +92,7 @@ def self.choose_option(x)
     x
     Book.suggested_book(x)
   when "c"
-    puts "Ok, no worries!"
+    puts "\nOk, no worries!"
     goodbye
   end
   x
@@ -92,37 +101,39 @@ end
 
 
 def self.feeling_lucky
-  puts "YOU daredevil.".red
+  puts "\nYOU daredevil.".bold.red
   sleep(1)
-  puts "Ready for an awesome book?".red
-  # sleep(1)
-  # puts "3".red
-  # sleep(2)
-  # puts "2"
-  # sleep(1)
-  # puts "1".green
-  # sleep(2)
-  # puts ""
-  # puts ""
-  # puts "WAIT FOR IT".yellow
-  # puts ""
-  # puts ""
-  # puts ""
-  # sleep(2)
-  # puts ""
-  # puts ""
-  # puts ""
-  # puts ""
-  # puts ""
-  # puts "WAIT FOR IT".bold.yellow
-  # puts ""
-  # puts ""
-  # puts ""
-  # sleep(2)
+  puts "\nReady for an awesome book?".red
+  sleep(1)
+  puts "\n3".red
+  sleep(2)
+  puts "\n2".yellow
+  sleep(1)
+  puts "\n1".green
+  pid = fork{ exec 'afplay', "music/Elevator Music 1 hour.mp3"}
+  sleep(2)
+  puts ""
+  puts ""
+  puts "\nWAIT FOR IT".yellow
+  puts ""
+  puts ""
+  puts ""
+  sleep(3)
+  puts ""
+  puts ""
+  puts ""
+  puts ""
+  puts ""
+  puts "WAIT FOR IT".bold.yellow
+  puts ""
+  puts ""
+  puts ""
+  sleep(3)
+  pid = fork{ exec 'killall', "afplay" }
   x = Book.all.sample
-  puts "Voilà! Here's our pick for you: #{x.title} by #{x.author}".green
-  puts "/n Do you want go right ahead and reserve the book?"
-  puts "Hell yeah or nah?"
+  puts "\nVoilà! Here's our pick for you:" + " #{x.title} by #{x.author}".green
+  puts "\nDo you want go right ahead and reserve the book?"
+  puts "\nHell yeah or nah?"
   response = gets.chomp.downcase.first
   Book.reserve(response, x)
   end
@@ -134,16 +145,21 @@ def self.feeling_lucky
      x
      k = j.sample
     #   #j is the new array of specific random book instance within genre
-       puts "#{x.genre.upcase} OMG. OUR FAVOURITE GENRE TOO!!"
-       puts "We thought you might like this: Title: #{k.title} by #{k.author}"
-       puts "Would you like to reserve this book?"
+       puts "\n#{x.genre.upcase} OMG.".yellow + " OUR FAVOURITE GENRE TOO!!"
+       puts "\nWe thought you might like this: Title: #{k.title} by #{k.author}"
+       puts "\nWould you like to reserve this book?"
     y = gets.chomp.downcase.first
     Book.reserve(y, k)
     end
   end
 
   def goodbye
-    puts "Thanks for checking us out. Loved having you here."
-    puts "The more that you read, the more things that you'll know. The more you'll learn, the more places that you'll go."
-    puts "Dr.Seuss"
+    puts "\nThanks for checking us out. Loved having you here. Quick quote:"
+    puts "\nThe more that you read, the more things that you'll know. The more you'll learn, the more places that you'll go.".bold.blue
+    puts "\nDr.Seuss".bold.blue
   end
+
+
+
+  # frank << orwell
+  # frank.remove(orwell)
