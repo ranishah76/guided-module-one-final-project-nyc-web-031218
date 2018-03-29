@@ -20,7 +20,7 @@ class Book < ActiveRecord::Base
      l = x #l is our whole book instance
      y = response
      Book.reserve(y, l, user)
-     binding.pry
+
   end
 
 
@@ -32,12 +32,18 @@ class Book < ActiveRecord::Base
       l.save
       user.add_book(l)
 
-      puts "\nITS YOUsRS.".bold.red
+      puts "\nITS YOURS.".bold.red
       puts "\nITS RESERVED."
       puts "\nBUT REMEMBER...."
       puts "\nNOT FOREVER </3"
-      puts "\nHappy reading! Bye for now."
-      goodbye
+      puts "\nDo you want to check your reservations? Type yes or no?"
+      response = gets.chomp.first.downcase
+      case response
+      when "y"
+        user.my_reservations
+      when "n"
+      Book.goodbye
+    end
     when "y"
       l.availability = false
       l.save
@@ -47,8 +53,14 @@ class Book < ActiveRecord::Base
       puts "\nITS RESERVED."
       puts "\nBUT REMEMBER...."
       puts "\nNOT FOREVER </3"
-      puts "\nHappy reading! Bye for now."
-      goodbye
+      puts "\nDo you want to check your reservations? Type yes or no?"
+      response = gets.chomp.first.downcase
+      case response
+      when "y"
+        user.my_reservations
+      when "n"
+      Book.goodbye
+    end
     when "n"
       puts "\nNo hard feelings."
       puts "\nHeading out? Just type- exit."
@@ -58,7 +70,7 @@ class Book < ActiveRecord::Base
     when "l"
       Book.feeling_lucky
     when "e"
-      goodbye
+      Book.goodbye
     end
     end
   end
@@ -82,16 +94,14 @@ class Book < ActiveRecord::Base
     response = gets.chomp.downcase.first
     case response
     when "h"
-    goodbye
+    Book.goodbye
   when "y"
-  goodbye
+  Book.goodbye
   when "n"
     user
     User.main_menu(user)
     end
   end
-
-
 
 def self.choose_option(x, user)
   puts "\nDon't stress. How about we help you find another book? Just pick from the options below."
@@ -101,13 +111,13 @@ def self.choose_option(x, user)
   response = gets.chomp.downcase
   case response
   when "a"
-    Book.feeling_lucky
+    Book.feeling_lucky(user)
   when "b"
     x
-    Book.suggested_book(x)
+    Book.suggested_book(x, user)
   when "c"
     puts "\nOk, no worries!"
-    goodbye
+    Book.goodbye
   end
   x
 end
@@ -164,13 +174,13 @@ def self.feeling_lucky(user)
      when "y"
         Book.feeling_lucky(user)
      when "l"
-       goodbye
+       Book.goodbye
      end
     else
      x
      user
      k = j.sample
-     binding.pry
+
     #   #j is the new array of specific random book instance within genre
        puts "\n#{x.genre.upcase} OMG.".yellow + " OUR FAVOURITE GENRE TOO!!"
        puts "\nWe thought you might like this: Title: #{k.title} by #{k.author}"
@@ -183,7 +193,7 @@ def self.feeling_lucky(user)
     end
 
 
-  def goodbye
+  def self.goodbye
     puts "\nThanks for checking us out. Loved having you here. Quick quote:"
     puts "\nThe more that you read, the more things that you'll know. The more you'll learn, the more places that you'll go.".bold.blue
     puts "\nDr.Seuss".bold.blue
