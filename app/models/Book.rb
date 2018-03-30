@@ -68,7 +68,7 @@ class Book < ActiveRecord::Base
       response = gets.chomp.downcase.first
     case response
     when "l"
-      Book.feeling_lucky
+      Book.feeling_lucky(user)
     when "e"
       Book.goodbye
     end
@@ -106,8 +106,8 @@ class Book < ActiveRecord::Base
 def self.choose_option(x, user)
   puts "\nDon't stress. How about we help you find another book? Just pick from the options below."
   puts "\nA".yellow + "- I'm Feeling Lucky #GoogleStyle"
-  puts "\nB".yellow + "I'm still feeling #{x.genre}."
-  puts "\nC".yellow + "Neither."
+  puts "\nB".yellow + "- I'm still feeling #{x.genre}."
+  puts "\nC".yellow + "- Neither."
   response = gets.chomp.downcase
   case response
   when "a"
@@ -166,7 +166,7 @@ def self.feeling_lucky(user)
     j = Book.all.select do |book|
       book.genre == x.genre && book.availability == true
     end
-    if j=[]
+    if j == []
       puts "Sorry no availble books, within that genre"
       puts "Try again via feeling lucky? (Yes) Or do you want to leave Bookflix? (Leave)"
       response = gets.chomp.downcase.first

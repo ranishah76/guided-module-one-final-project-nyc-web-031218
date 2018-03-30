@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :libraries #through: :books
 ###user is good here
   def self.find_book(user)
-    puts "\nDang. This is exciting #{user}. Write the title of the book below, and we'll let you know if it's availble."
+    puts "\nDang. This is exciting #{user.name}. Write the title of the book below, and we'll let you know if it's availble."
     response = gets.chomp
      x = Book.all.find do |book|
       book.title.downcase == response.downcase
@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
 
   def self.main_menu(user)
     user
-    puts "\nSo #{name} here are your options, just select A, B or C:".yellow
+    puts "\nSo #{user.name} here are your options, just select A, B or C:".yellow
     puts "A".yellow + "- Got a book in mind. Let's find it"
     puts "B".yellow + "- No idea. Help me out. PLEAAAASE."
     puts "C".yellow + "- Breaking-up with my book. Need to return it."
